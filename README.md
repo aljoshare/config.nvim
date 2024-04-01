@@ -5,7 +5,7 @@
 </div>
 
 ---
-My personal NeoVim configuration for MacOS, Linux and Windows. I use NeoVim as my daily driver for various things but primarily for software development including IaC, CI/CD, documentation and so on. It's battle-tested for:
+My personal [NeoVim](https://neovim.io/) configuration for MacOS, Linux and Windows. I use nvim as my daily driver for various things but primarily for software development including IaC, CI/CD, documentation and so on. It's battle-tested for:
 
 - Rust
 - Go
@@ -45,3 +45,5 @@ Feel free to fork it! Happy hacking! :penguin:
 - tokyonight.nvim
 - vim-illuminate
 - which-key.nvim
+
+## How it looks
