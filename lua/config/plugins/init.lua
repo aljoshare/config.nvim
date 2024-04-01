@@ -1,13 +1,5 @@
 plugins = {
-	{
-		"folke/tokyonight.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			-- load the colorscheme here
-			vim.cmd([[colorscheme tokyonight]])
-		end,
-	},
+	{ "rebelot/kanagawa.nvim" },
 	{
 		"hrsh7th/nvim-cmp",
 		-- load cmp on InsertEnter
@@ -54,7 +46,7 @@ plugins = {
 	},
 	{
 		"stevearc/conform.nvim",
-		opts = {},
+		dependencies = { "mason.nvim" },
 	},
 	{ "mfussenegger/nvim-lint" },
 	{ "neovim/nvim-lspconfig" },
@@ -68,4 +60,11 @@ plugins = {
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{ "ray-x/guihua.lua", "ray-x/navigator.lua" },
+	{
+		"utilyre/barbecue.nvim",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+	},
 }

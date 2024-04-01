@@ -1,22 +1,6 @@
 require("mason").setup()
 
-require("mason-lspconfig").setup({
-	ensure_installed = {
-		"lua_ls",
-		"rust_analyzer",
-		"gopls",
-		"jsonls",
-		"java_language_server",
-		"jinja_lsp",
-		"marksman",
-		"pyright",
-		"tflint",
-		"yamlls",
-		"terraformls",
-		"bashls",
-		"dockerls",
-	},
-})
+require("mason-lspconfig").setup()
 
 require("lspconfig").lua_ls.setup({})
 require("lspconfig").rust_analyzer.setup({})

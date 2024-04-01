@@ -13,6 +13,10 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.keymap.set("n", "<C-s>", "<cmd>:w<CR>", {
+	desc = "Save File",
+})
+
 -- nvim-spectre --
 vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
 	desc = "Toggle Spectre",
@@ -67,4 +71,10 @@ end)
 vim.keymap.set("n", "<C-S-N>", function()
 	harpoon:list():next()
 end)
+-- --
+
+-- Conform --
+vim.keymap.set("n", "<leader>l", "<cmd> :Format<CR>", {
+	desc = "Format File",
+})
 -- --
