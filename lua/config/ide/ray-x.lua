@@ -1,3 +1,3 @@
 require("navigator").setup({
-	mason = false,
+    mason = false,
 })
