@@ -33,6 +33,13 @@ vim.keymap.set("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search(
 
 -- --
 
+-- WinCMD --
+vim.keymap.set({ "t", "n" }, "<C-j>", "<cmd>:wincmd w<CR>", {
+  desc = "Jump to next Window",
+})
+
+--
+
 -- Telescope --
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
