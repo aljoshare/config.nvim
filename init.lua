@@ -20,6 +20,7 @@ require("config.ui.kanagawa")
 require("config.ui.lualine")
 require("config.ui.barbecue")
 require("config.ui.toggleterm")
+require("config.ui.alpha")
 -- --
 
 -- LSP --

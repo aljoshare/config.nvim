@@ -74,9 +74,6 @@ return {
   {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("alpha").setup(require("alpha.themes.dashboard").config)
-    end,
   },
   { "akinsho/toggleterm.nvim", version = "*", config = true },
   { "lewis6991/gitsigns.nvim" },
