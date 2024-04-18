@@ -74,7 +74,6 @@ return {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  { "akinsho/toggleterm.nvim",        version = "*",        config = true },
   { "lewis6991/gitsigns.nvim" },
   { "declancm/cinnamon.nvim" },
   { "nvim-focus/focus.nvim",          version = "*" },
