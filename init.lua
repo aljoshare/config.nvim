@@ -16,7 +16,7 @@ require("lazy").setup(plugins)
 -- End --
 
 -- UI --
-require("config.ui.kanagawa")
+require("config.ui.catppuccin")
 require("config.ui.lualine")
 require("config.ui.barbecue")
 require("config.ui.alpha")
