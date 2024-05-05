@@ -1,7 +1,7 @@
 return {
   require("lualine").setup({
     options = {
-      theme = "gruvbox-material",
+      theme = "nightfly",
       globalstatus = true,
     },
   }),
