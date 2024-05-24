@@ -42,46 +42,80 @@ vim.keymap.set({ "t", "n" }, "<C-j>", "<cmd>:wincmd w<CR>", {
 
 -- Telescope --
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
+vim.keymap.set("n", "<leader>ff", builtin.find_files, {
+  desc = "Find filesi (Telescope)"
+})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {
+  desc = "Live Grep (Telescope)"
+})
+vim.keymap.set("n", "<leader>fb", builtin.buffers, {
+  desc = "Buffers (Telescope)"
+})
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, {
+  desc = "Help Tags (Telescope)"
+})
+vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {
+  desc = "Old Files (Telescope)"
+})
 -- --
 
 -- NeoTree --
-vim.keymap.set("n", "<C-n>", "<Cmd>Neotree toggle<CR>")
+vim.keymap.set("n", "<C-n>", "<Cmd>Neotree toggle<CR>", {
+  desc = "Toggle Neotree"
+}
+)
 -- --
 
 -- Harpoon2 --
 local harpoon = require("harpoon")
 vim.keymap.set("n", "<leader>a", function()
   harpoon:list():append()
-end)
+end, {
+  desc = "Add file to harpoon",
+})
 vim.keymap.set("n", "<C-h>", function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
+end, {
+  desc = "Open harpoon quick menu"
+})
 
 vim.keymap.set("n", "<C-q>", function()
   harpoon:list():select(1)
-end)
+end, {
+  desc = "Jump to next 1) harpoon buffer"
+})
+
 vim.keymap.set("n", "<C-w>", function()
   harpoon:list():select(2)
-end)
+end, {
+  desc = "Jump to 2) harpoon buffer"
+})
+
 vim.keymap.set("n", "<C-e>", function()
   harpoon:list():select(3)
-end)
+end, {
+  desc = "Jump to 3) harpoon buffer"
+})
+
 vim.keymap.set("n", "<C-r>", function()
   harpoon:list():select(4)
-end)
+end, {
+  desc = "Jump to 4) harpoon buffer"
+})
+
 
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-S-P>", function()
   harpoon:list():prev()
-end)
+end, {
+  desc = "Jump to previous harpoon buffer"
+})
 vim.keymap.set("n", "<C-S-N>", function()
   harpoon:list():next()
-end)
+end, {
+  desc = "Jump to next harpoon buffer"
+})
+
 -- --
 
 -- Conform --
@@ -115,3 +149,8 @@ vim.keymap.set("n", "<leader>cg", "<cmd> :CellularAutomaton game_of_life<CR>", {
   desc = "Game Of Life",
 })
 --
+
+-- Code Actions --
+vim.keymap.set({ "v", "n" }, "<leader>c", require("actions-preview").code_actions, {
+  desc = "Code Action"
+})
