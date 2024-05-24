@@ -92,5 +92,6 @@ return {
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
-  { "airblade/vim-rooter" }
+  { "airblade/vim-rooter" },
+  { "aznhe21/actions-preview.nvim" }
 }
