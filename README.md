@@ -5,6 +5,11 @@
 </div>
 
 ---
+![Static Badge](https://img.shields.io/badge/unfinished-goods-8839ef)
+![GitHub last commit](https://img.shields.io/github/last-commit/aljoshare/config.nvim?color=%23dc8a78)
+![GitHub top language](https://img.shields.io/github/languages/top/aljoshare/config.nvim?color=%23ea76cb)
+
+
 My [NeoVim](https://neovim.io/) configuration for MacOS, Linux and Windows. I use nvim as my daily driver for various things but primarily for software development but also Infrastructure as Code, CI/CD and documentation. It's battle-tested for:
 
 - Rust
