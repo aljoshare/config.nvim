@@ -1,7 +1,7 @@
 return {
   require("lualine").setup({
     options = {
-      theme = "nightfly",
+      theme = "catppuccin",
       globalstatus = true,
     },
   }),
