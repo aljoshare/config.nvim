@@ -32,6 +32,8 @@ require("config.ide.conform")
 require("config.ide.ray-x")
 require("config.ide.treesitter")
 require("config.ide.gitblame")
+require("config.ide.dap")
+require("config.ide.dapui")
 -- --
 
 -- Navigation --

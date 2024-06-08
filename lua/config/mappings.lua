@@ -43,7 +43,7 @@ vim.keymap.set({ "t", "n" }, "<C-j>", "<cmd>:wincmd w<CR>", {
 -- Telescope --
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {
-  desc = "Find filesi (Telescope)"
+  desc = "Find files (Telescope)"
 })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {
   desc = "Live Grep (Telescope)"
@@ -154,3 +154,40 @@ vim.keymap.set("n", "<leader>cg", "<cmd> :CellularAutomaton game_of_life<CR>", {
 vim.keymap.set({ "v", "n" }, "<leader>c", require("actions-preview").code_actions, {
   desc = "Code Action"
 })
+
+
+-- DAP --
+vim.keymap.set("n", "<leader>do", require("dapui").open, {
+  desc = "Open dap-ui",
+})
+vim.keymap.set("n", "<leader>dc", require("dapui").close, {
+  desc = "Close dap-ui",
+})
+vim.keymap.set("n", "<leader>dd", require("dapui").toggle, {
+  desc = "Toggle dap-ui",
+})
+
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
+vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
+vim.keymap.set('n', '<Leader>lp',
+  function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
+vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
+  require('dap.ui.widgets').hover()
+end)
+vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
+  require('dap.ui.widgets').preview()
+end)
+vim.keymap.set('n', '<Leader>df', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.frames)
+end)
+vim.keymap.set('n', '<Leader>ds', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.scopes)
+end)
