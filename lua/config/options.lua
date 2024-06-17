@@ -34,3 +34,7 @@ vim.opt.guicursor = ""
 vim.opt.termguicolors = true
 
 vim.opt.cmdheight = 0
+
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

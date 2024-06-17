@@ -38,7 +38,7 @@ require("config.ide.dapui")
 
 -- Navigation --
 require("config.navigation.harpoon")
-require("config.navigation.neo-tree")
+require("config.navigation.nvim-tree")
 require("config.navigation.cinnamon")
 -- --
 

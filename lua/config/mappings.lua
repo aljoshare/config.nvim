@@ -60,8 +60,8 @@ vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {
 -- --
 
 -- NeoTree --
-vim.keymap.set("n", "<C-n>", "<Cmd>Neotree toggle<CR>", {
-  desc = "Toggle Neotree"
+vim.keymap.set("n", "<C-n>", "<Cmd>NvimTreeOpen<CR>", {
+  desc = "Toggle NvimTree"
 }
 )
 -- --
