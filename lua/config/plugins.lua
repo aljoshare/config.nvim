@@ -1,19 +1,5 @@
 return {
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  {
-    "hrsh7th/nvim-cmp",
-    -- load cmp on InsertEnter
-    event = "InsertEnter",
-    -- these dependencies will only be loaded when cmp loads
-    -- dependencies are always lazy-loaded unless specified otherwise
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-    },
-    config = function()
-      -- ...
-    end,
-  },
+  { "catppuccin/nvim",        name = "catppuccin", priority = 1000 },
   { "nvim-tree/nvim-tree.lua" },
   {
     "folke/which-key.nvim",
@@ -39,7 +25,32 @@ return {
     dependencies = { "mason.nvim" },
   },
   { "mfussenegger/nvim-lint" },
-  { "neovim/nvim-lspconfig" },
+  {
+    "neovim/nvim-lspconfig",
+    lazy = false,
+    dependencies = {
+      -- main one
+      { "ms-jpq/coq_nvim",       branch = "coq" },
+
+      -- 9000+ Snippets
+      { "ms-jpq/coq.artifacts",  branch = "artifacts" },
+
+      -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+      -- Need to **configure separately**
+      { 'ms-jpq/coq.thirdparty', branch = "3p" }
+      -- - shell repl
+      -- - nvim lua api
+      -- - scientific calculator
+      -- - comment banner
+      -- - etc
+    },
+    init = function()
+      vim.g.coq_settings = {
+        auto_start = true, -- if you want to start COQ at startup
+        -- Your COQ settings here
+      }
+    end,
+  },
   { "williamboman/mason.nvim",         "williamboman/mason-lspconfig.nvim",      "neovim/nvim-lspconfig" },
   { "nvim-treesitter/nvim-treesitter", "nvim-treesitter/nvim-treesitter-context" },
   { "stevearc/dressing.nvim" },
