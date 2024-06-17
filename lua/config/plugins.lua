@@ -86,4 +86,5 @@ return {
   { "airblade/vim-rooter" },
   { "aznhe21/actions-preview.nvim" },
   { "rcarriga/nvim-dap-ui",        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+  { "roobert/action-hints.nvim" }
 }

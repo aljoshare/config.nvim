@@ -34,6 +34,7 @@ require("config.ide.treesitter")
 require("config.ide.gitblame")
 require("config.ide.dap")
 require("config.ide.dapui")
+require("config.ide.action-hints")
 -- --
 
 -- Navigation --
