@@ -1,45 +1,45 @@
--- neo-tree --
-vim.api.nvim_create_autocmd("BufEnter", {
-  command = "set rnu nu",
-})
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
--- conform --
-local conform = require("conform")
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function(args)
-    conform.format({ bufnr = args.buf })
+local general = augroup("GeneralSettings", { clear = true })
+
+-- Highlight on yank
+autocmd("TextYankPost", {
+  group = general,
+  desc = "Highlight text on yank",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
   end,
 })
 
-vim.api.nvim_create_user_command("Format", function(args)
-  local range = nil
-  if args.count ~= -1 then
-    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-    range = {
-      start = { args.line1, 0 },
-      ["end"] = { args.line2, end_line:len() },
-    }
-  end
-  conform.format({ async = true, lsp_fallback = true, range = range })
-end, { range = true })
-
-vim.api.nvim_create_user_command("FormatDisable", function(args)
-  if args.bang then
-    -- FormatDisable! will disable formatting just for this buffer
-    vim.b.disable_autoformat = true
-  else
-    vim.g.disable_autoformat = true
-  end
-end, {
-  desc = "Disable autoformat-on-save",
-  bang = true,
+-- Resize splits if window is resized
+autocmd("VimResized", {
+  group = general,
+  desc = "Resize splits on window resize",
+  callback = function()
+    vim.cmd("tabdo wincmd =")
+  end,
 })
 
-vim.api.nvim_create_user_command("FormatEnable", function()
-  vim.b.disable_autoformat = false
-  vim.g.disable_autoformat = false
-end, {
-  desc = "Re-enable autoformat-on-save",
+-- Return to last edit position when opening files
+autocmd("BufReadPost", {
+  group = general,
+  desc = "Restore last cursor position",
+  callback = function(args)
+    local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+    local line_count = vim.api.nvim_buf_line_count(args.buf)
+    if mark[1] > 0 and mark[1] <= line_count then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
 })
--- --
+
+-- Close certain transient filetypes with 'q'
+autocmd("FileType", {
+  group = general,
+  pattern = { "help", "lspinfo", "man", "notify", "qf", "checkhealth" },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = event.buf, silent = true })
+  end,
+})

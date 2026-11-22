@@ -1,40 +1,47 @@
-vim.opt.mousemoveevent = true
+local opt = vim.opt
 
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.scrolloff = 10
+-- Line numbers
+opt.number = true
+opt.relativenumber = true
 
-vim.opt.splitkeep = "screen"
+-- Tabs & Indentation
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.softtabstop = 2
+opt.expandtab = true
+opt.smartindent = true
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+-- Search behavior
+opt.ignorecase = true
+opt.smartcase = true
+opt.hlsearch = true
+opt.incsearch = true
 
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
+-- Appearance & UI
+opt.termguicolors = true
+opt.signcolumn = "yes"
+opt.cursorline = true
+opt.scrolloff = 8
+opt.sidescrolloff = 8
+opt.wrap = false
+opt.fillchars = { eob = " " }
 
--- use number of spaces to insert a <Tab>
-vim.opt.expandtab = true
+-- Splits
+opt.splitright = true
+opt.splitbelow = true
+opt.splitkeep = "screen"
 
-vim.opt.swapfile = false
+-- Performance & Behavior
+opt.updatetime = 250
+opt.timeoutlen = 300
+opt.swapfile = false
+opt.backup = false
+opt.undofile = true -- Persistent undo across sessions
 
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+-- Mouse & Clipboard (works across Linux & macOS)
+opt.mouse = "a"
+opt.clipboard = "unnamedplus"
 
--- highlight the line number of the cursor
-vim.opt.cursorline = true
-vim.opt.cursorlineopt = "number"
-
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
-
--- disable cursor-styling
-vim.opt.guicursor = ""
-
-vim.opt.termguicolors = true
-
-vim.opt.cmdheight = 0
-
--- disable netrw
+-- Disable netrw in favor of oil.nvim
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
