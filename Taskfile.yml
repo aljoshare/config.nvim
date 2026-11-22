@@ -1,0 +1,97 @@
+version: '3'
+
+vars:
+  CONFIG_DIR: '{{.ROOT_DIR}}'
+  TARGET_DIR: '{{.XDG_CONFIG_HOME | default (print .HOME "/.config")}}/nvim'
+
+tasks:
+  default:
+    desc: Install Neovim configuration for the current operating system
+    cmds:
+      - task: '{{if eq OS "darwin"}}install:macos{{else}}install:linux{{end}}'
+
+  install:linux:
+    desc: Install and set up Neovim configuration on Linux
+    aliases: [install-linux]
+    cmds:
+      - echo "==> Installing Neovim configuration for Linux..."
+      - cmd: |
+          if ! command -v git >/dev/null 2>&1; then
+            echo "Error: git is required but not installed." >&2
+            exit 1
+          fi
+          if ! command -v nvim >/dev/null 2>&1; then
+            echo "Warning: neovim is not found in PATH." >&2
+            echo "Please install Neovim (v0.10+) via your Linux package manager (apt, dnf, pacman, etc.) or AppImage." >&2
+          fi
+          if ! command -v rg >/dev/null 2>&1; then
+            echo "Notice: ripgrep (rg) is recommended for Telescope live grep."
+          fi
+          if ! command -v xclip >/dev/null 2>&1 && ! command -v wl-copy >/dev/null 2>&1; then
+            echo "Notice: xclip or wl-clipboard is recommended for system clipboard integration."
+          fi
+      - task: link-config
+      - task: sync-plugins
+
+  install:macos:
+    desc: Install and set up Neovim configuration on macOS
+    aliases: [install-macos]
+    cmds:
+      - echo "==> Installing Neovim configuration for macOS..."
+      - cmd: |
+          if command -v brew >/dev/null 2>&1; then
+            echo "Homebrew detected. Checking required packages..."
+            for pkg in neovim ripgrep make; do
+              if ! command -v "$pkg" >/dev/null 2>&1 && ! brew list "$pkg" >/dev/null 2>&1; then
+                echo "Installing $pkg via Homebrew..."
+                brew install "$pkg" || true
+              fi
+            done
+          else
+            if ! command -v nvim >/dev/null 2>&1; then
+              echo "Warning: neovim is not installed and Homebrew was not found." >&2
+              echo "Please install Neovim (v0.10+): https://neovim.io/" >&2
+            fi
+          fi
+      - task: link-config
+      - task: sync-plugins
+
+  link-config:
+    internal: true
+    desc: Symlink configuration to ~/.config/nvim
+    cmds:
+      - cmd: |
+          TARGET="{{.TARGET_DIR}}"
+          SOURCE="{{.CONFIG_DIR}}"
+
+          mkdir -p "$(dirname "$TARGET")"
+
+          if [ -L "$TARGET" ]; then
+            CURRENT_LINK="$(readlink "$TARGET")"
+            if [ "$CURRENT_LINK" = "$SOURCE" ]; then
+              echo "✓ Neovim config is already linked to $SOURCE"
+              exit 0
+            fi
+            echo "Updating existing symlink ($CURRENT_LINK -> $SOURCE)..."
+            rm "$TARGET"
+          elif [ -e "$TARGET" ]; then
+            BACKUP="${TARGET}.backup.$(date +%Y%m%d_%H%M%S)"
+            echo "Backing up existing config to $BACKUP..."
+            mv "$TARGET" "$BACKUP"
+          fi
+
+          ln -s "$SOURCE" "$TARGET"
+          echo "✓ Successfully linked $SOURCE -> $TARGET"
+
+  sync-plugins:
+    internal: true
+    desc: Bootstrap lazy.nvim and install plugins headlessly
+    cmds:
+      - cmd: |
+          if command -v nvim >/dev/null 2>&1; then
+            echo "==> Bootstrapping lazy.nvim and syncing plugins..."
+            nvim --headless "+Lazy! sync" "+qa" || true
+            echo "✓ Plugins synchronized successfully."
+          else
+            echo "Skipping plugin sync: 'nvim' command not found."
+          fi

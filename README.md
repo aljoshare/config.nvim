@@ -115,6 +115,30 @@ Leader key is `Space`.
 3. **C compiler and Make** (optional, for telescope-fzf-native)
 4. A **Nerd Font** (recommended: JetBrainsMono Nerd Font)
 
+### Option 1: Quick Install via Taskfile (go-task)
+
+If you have [go-task](https://taskfile.dev/) installed:
+
+```bash
+# Clone the repository anywhere
+git clone https://github.com/aljoshare/config.nvim.git
+cd config.nvim
+
+# Install for Linux:
+task install:linux
+
+# Install for macOS:
+task install:macos
+```
+
+The Taskfile will:
+- Check for required dependencies (and install missing ones via Homebrew on macOS)
+- Safely backup existing `~/.config/nvim` configurations
+- Symlink the repository to `~/.config/nvim`
+- Headlessly sync and install all plugins via `lazy.nvim`
+
+### Option 2: Manual Clone
+
 Clone this repository into your Neovim config directory:
 ```bash
 # Linux / macOS
